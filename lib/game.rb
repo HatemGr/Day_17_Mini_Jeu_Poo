@@ -71,8 +71,8 @@ class Game
     puts "| Le but du jeu est d'être le dernier survivant !| "
     puts "---------------------------------------------------"
     puts " "
-    puts "Bienvenu à toi #{human_player.name}, tu viens ici combattre #{@enemies_left} ennemis redoutables !"
-    puts "Prepare toi ! Ils arrivent !"
+    puts "Bienvenue à toi #{human_player.name}, tu viens ici combattre #{@enemies_left} ennemis redoutables !"
+    puts "Prepare toi... Ils arrivent !"
   end
 
   def round_board
@@ -122,7 +122,7 @@ class Game
   end
 
   def ennemies_attack
-    @enemies_in_sight.each {|enemy| enemy.attacks(human_player) ; self.spacer}
+    @enemies_in_sight.each {|enemy| @human_player.is_alive? ? (enemy.attacks(human_player) ; self.spacer) : enemy}
   end
 
   def game_over
