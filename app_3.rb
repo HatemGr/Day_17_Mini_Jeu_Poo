@@ -9,7 +9,7 @@ puts "Quell est ton nom de guerrier ?"
 print "->"
 name_input = gets.chomp
 new_game = Game.new(HumanPlayer.new(name_input))
-# -- 
+# -- Affichage de la bannière
 new_game.header_display
 
 while new_game.still_on_going?

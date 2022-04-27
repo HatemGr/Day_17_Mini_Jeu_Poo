@@ -10,16 +10,17 @@ puts "|Le but du jeu est d'être le dernier survivant !|"
 puts "-------------------------------------------------"
 puts " "
 
-#Initialisation du joueur en lui demandant son nom et creation d'une instance HumanPlayer
+#-- Initialisation du joueur en lui demandant son nom et creation d'une instance HumanPlayer
 puts "Quell est ton nom de guerrier ?"
 print "->"
 name_input = gets.chomp
 player = HumanPlayer.new(name_input)
 
-#Initialisation des ennemis par deux instances de Players
+#-- Initialisation des ennemis par deux instances de Players
 ennemies = [ennemi_1 = Player.new("Josiane"), ennemi_2 = Player.new("José")]
 round_number = 1
 
+#-- Succession de rounds jusqu'a la victoire d'un des camps
 while player.life_points > 0 && (ennemi_1.is_alive? || ennemi_2.is_alive?)
   puts ""
   puts "#"*20 + " -- ROUND #{round_number} -- " + "#"*20
@@ -39,7 +40,7 @@ while player.life_points > 0 && (ennemi_1.is_alive? || ennemi_2.is_alive?)
     player_choice = gets.chomp
     puts "- " * 25
 
-    #Module switch pour gerer le choix du joueur
+    # -- Module switch pour gerer le choix du joueur
     case player_choice
     when "a"
       player.search_weapon()
@@ -60,21 +61,23 @@ while player.life_points > 0 && (ennemi_1.is_alive? || ennemi_2.is_alive?)
         next_round = true
       else 
         puts "#{ennemi_2.name} est déjà mort."
+        next_round = false
       end
     else
       puts "Choix non reconnu, choisir 'a', 's', '0' ou '1'"
+      next_round = false
+    end
     end
     puts ""
-    puts "Les ennemis attaquent !"
+    ennemi_1.is_alive? || ennemi_2.is_alive? ? (puts "Les ennemis attaquent !") : (puts " ")
     ennemies.each do |ennemi|
       puts "- " * 25
       if player.is_alive?
         ennemi.is_alive? ? ennemi.attacks(player) : (puts "#{ennemi.name} est mort.")
       end
-    end
-    #Passage au round suivant
-    round_number += 1
   end
+  #Passage au round suivant
+  round_number += 1
 end
 
 #Determination du vainqueur en sortant de la loop while

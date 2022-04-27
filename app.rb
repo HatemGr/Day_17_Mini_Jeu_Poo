@@ -9,6 +9,7 @@ require_relative "lib/player"
 player1 = Player.new("Josiane")
 player2 = Player.new("José")
 
+# -- Lancement du combat
 while player1.life_points > 0 && player2.life_points > 0
   puts "-" * 50
   puts "Voici l'état de chaque joueur :"
@@ -20,8 +21,9 @@ while player1.life_points > 0 && player2.life_points > 0
   player2.life_points <= 0 ? break : player2.attacks(player1)  
 end
 
+# -- Declaration du vainqueur
 winner = Player.all.select {|player| player.life_points > 0}.first
 puts "#{winner.name} a gagné la bataille !"
 
 playerh = HumanPlayer.new("Grey Hat")
-binding.pry
+#binding.pry

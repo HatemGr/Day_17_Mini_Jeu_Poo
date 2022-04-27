@@ -61,7 +61,7 @@ class Game
   def show_players
     @human_player.show_state
     puts "Il a #{@enemies_in_sight.size} ennemis en face de vous."
-    puts "#{@enemies_left} ennemies vous regardent de loin"
+    puts "#{@enemies_left} ennemies vous regardent de loin."
     puts " "
   end
 
@@ -108,7 +108,7 @@ class Game
       if nbr >= @enemies_in_sight.size
         puts "Il n'y a pas autant d'ennemi !"
         return false
-        elsif @enemies_in_sight[nbr].life_points > 0 
+        elsif @enemies_in_sight[nbr].is_alive? ######## A REVOIR
         human_player.attacks(@enemies_in_sight[nbr])
         if @enemies_in_sight[nbr].life_points <= 0
           kill_player(@enemies_in_sight[nbr])
